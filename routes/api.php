@@ -25,5 +25,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post("/score/test", [ScoreController::class, "test"]);
 Route::post("/score/add", [ScoreController::class, "add"]);
 Route::get("/score/all", [ScoreController::class, "getAllScores"]);
+Route::get("/score/dailyScoreCount", [ScoreController::class, "getScoreSubmissionsByDate"]);
 
 Route::post("/test", [TestController::class, "test"]);

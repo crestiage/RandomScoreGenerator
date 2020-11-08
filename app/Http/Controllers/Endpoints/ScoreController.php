@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Score;
 
+use Illuminate\Support\Facades\DB;
+
 class ScoreController extends Controller
 {
 
@@ -42,6 +44,15 @@ class ScoreController extends Controller
 
     public function getAllScores(){
         $data = array("data" => Score::all());
+        return response()->json($data, 200);
+    }
+
+    public function getScoreSubmissionsByDate(){
+        $dataset = DB::table("score")
+                    ->select(DB::raw("date_format(created_at, '%Y-%m-%d') as date_generated, count(id) as score_count"))
+                    ->groupBy("date_generated")
+                    ->get();
+        $data = array("data" => $dataset);
         return response()->json($data, 200);
     }
 

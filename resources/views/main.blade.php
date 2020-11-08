@@ -53,6 +53,28 @@
     </div>
 </div>
 
+<br />
+
+<div class="row">
+    <div class="col-md">
+        <h3>Generated Scores per day</h3>
+        <table id="generated-scores-per-day" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>No. of Generated Scores</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Date</th>
+                    <th>No. of Generated Scores</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
 <!-- Hidden Elements -->
 
 <div class="modal" tabindex="-1" role="dialog" id="notification-modal">
@@ -116,6 +138,16 @@
                 { "data" : "from_score_range" },
                 { "data" : "to_score_range" },
                 { "data" : "score_generated" }
+            ]
+        });
+
+        var scoreCountPerDay = $("#generated-scores-per-day").DataTable({
+            "ajax": "/api/score/dailyScoreCount",
+            // Order by date_generated at descending
+            "order": [[0, "desc"]],
+            "columns": [
+                { "data" : "date_generated" },
+                { "data" : "score_count" }
             ]
         });
 
